@@ -28,6 +28,12 @@ split(L, 0, [], L) :- !.
 split([H | T], E, [H | L1], L2) :- N is E - 1, split(T, N, L1, L2).
 
 append_last([], E, [E]) :- !.
+append_last([H | T], E, [H | L]) :- append_last(T, E, L).
 
 rotate([], []).
 rotate([H | T], L) :- append_last(T, H, L).
+
+dice(6, 6) :- !.
+dice(X, X).
+dice(X, N) :- N2 is N + 1, dice(X, N2).
+dice(X) :- dice(X, 1).
