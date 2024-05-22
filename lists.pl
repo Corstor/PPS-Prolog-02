@@ -40,3 +40,15 @@ dice(X) :- dice(X, 1).
 
 three_dice(N, [H1, H2, H3]) :- dice(H1), dice(H2), dice(H3), N is H1 + H2 + H3.
 
+dropAny(X, [X | T], T).
+dropAny(X, [H | Xs], [H | L]) :- dropAny(X, Xs, L).
+
+dropFirst(X, L, L1) :- dropAny(X, L, L1), !.
+
+dropLast(X, [X | T], [X | L]) :- dropLast(X, T, L), !.
+dropLast(X, [X | T], T) :- !.
+dropLast(X, [H | Xs], [H | L]) :- dropLast(X, Xs, L).
+
+dropAll(X, L, L1) :- dropFirst(X, L, Temp), dropAll(X, Temp, L1), !.
+dropAll(X, L, L) :- !.
+
