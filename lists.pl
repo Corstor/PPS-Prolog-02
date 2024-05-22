@@ -37,3 +37,6 @@ dice(6, 6) :- !.
 dice(X, X).
 dice(X, N) :- N2 is N + 1, dice(X, N2).
 dice(X) :- dice(X, 1).
+
+three_dice(N, [H1, H2, H3]) :- dice(H1), dice(H2), dice(H3), N is H1 + H2 + H3.
+
