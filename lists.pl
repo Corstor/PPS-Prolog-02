@@ -52,3 +52,11 @@ dropLast(X, [H | Xs], [H | L]) :- dropLast(X, Xs, L).
 dropAll(X, L, L1) :- dropFirst(X, L, Temp), dropAll(X, Temp, L1), !.
 dropAll(X, L, L) :- !.
 
+fromList([_], []).
+fromList([H1, H2 | T], [e(H1, H2) | L]) :- fromList([H2 | T], L).
+
+fromCircList([H | T], L1) :- append_last(T, H, L), fromList([H | L], L1).
+
+outDegree([], N, 0).
+outDegree([e(N, _) | T], N, D) :- outDegree(T, N, S), D is S + 1, !.
+outDegree([e(E, _) | T], N, D) :- outDegree(T, N, D).
